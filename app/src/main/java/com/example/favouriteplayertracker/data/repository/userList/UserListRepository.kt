@@ -15,7 +15,7 @@ interface UserListRepository {
 
     fun getFavouritePlayers(): Flow<List<FavouritePlayer>>
 
-    suspend fun addFavouritePlayer(player: FavouritePlayer)
+    suspend fun addFavouritePlayer(name: String)
 
     suspend fun removeFavouritePlayer(player: FavouritePlayer)
 

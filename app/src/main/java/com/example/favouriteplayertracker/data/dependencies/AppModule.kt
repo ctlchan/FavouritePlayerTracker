@@ -22,9 +22,10 @@ object AppModule {
     @Singleton
     @Named("userListRepo")
     @Provides
-    fun provideUserListRepository(@Named("database") db: LocalDatabase): UserListRepository {
+    fun provideUserListRepository(
+        @Named("database") db: LocalDatabase, @Named("NbaApi") nbaApi: NbaApi): UserListRepository {
         // Dagger-Hilt knows that db is provided so it will do that for you.
-        return UserListRepositoryImpl(db.userListDao())
+        return UserListRepositoryImpl(db.userListDao(), nbaApi)
 
     }
 

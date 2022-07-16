@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface NbaApi {
 
-    @GET("/api/v1/players?")
-    fun getPlayer(@Query("search") name: String): Response<NBAPlayer>
+    @GET("/api/v1/players")
+    suspend fun getPlayer(@Query("search") name: String): Response<NbaApiGetAllJson>
 
 }

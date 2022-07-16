@@ -1,4 +1,4 @@
-package com.example.favouriteplayertracker.ui
+package com.example.favouriteplayertracker.ui.addPlayer
 
 import android.os.Bundle
 import android.util.Log
@@ -6,17 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.example.favouriteplayertracker.R
 import com.example.favouriteplayertracker.data.local.FavouritePlayer
 import com.example.favouriteplayertracker.data.local.LocalDatabase
 import com.example.favouriteplayertracker.databinding.FragmentAddPlayerBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -27,6 +26,9 @@ class AddPlayerFragment : Fragment() {
 
     private var _binding: FragmentAddPlayerBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: AddPlayerViewModel by viewModels()
+
 
     @Named("database")
     @Inject
@@ -59,13 +61,9 @@ class AddPlayerFragment : Fragment() {
             val newName = binding.addPlayerET.text.toString()
 
             if (newName != "") {
-                // Eventually: change so that it checks if the name is in the database of players.
-                // TODO: Move logic to ViewModel, revert DAO function to suspend function
 
-                runBlocking {
-                    launch {
-                        addPlayer(newName)
-                    }
+                lifecycleScope.launch {
+                    viewModel.addPlayer(newName)
                 }
 
                 Log.i(TAG, "Add button pressed.")
@@ -78,16 +76,6 @@ class AddPlayerFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    suspend fun addPlayer(name: String) {
-        withContext(Dispatchers.IO) {
-
-            val newPlayer = FavouritePlayer(name = name)
-            database.userListDao().addPlayer(newPlayer)
-
-            Log.i(TAG, database.userListDao().getAllPlayers().asLiveData().value.toString())
-        }
     }
 
 }

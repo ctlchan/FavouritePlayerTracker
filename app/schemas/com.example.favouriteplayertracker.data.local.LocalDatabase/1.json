@@ -2,17 +2,53 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "307971182b93b94482341084f369e822",
+    "identityHash": "edc9bc675ef6fb5b1bcd43f535d8d7b1",
     "entities": [
       {
         "tableName": "user_player_list",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `selected` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `height_feet` INTEGER, `height_inches` INTEGER, `id` INTEGER NOT NULL, `position` TEXT NOT NULL, `team_name` TEXT NOT NULL, `weight_pounds` INTEGER, `selected` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "height_feet",
+            "columnName": "height_feet",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "height_inches",
+            "columnName": "height_inches",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "team_name",
+            "columnName": "team_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight_pounds",
+            "columnName": "weight_pounds",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "selected",
@@ -34,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '307971182b93b94482341084f369e822')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'edc9bc675ef6fb5b1bcd43f535d8d7b1')"
     ]
   }
 }

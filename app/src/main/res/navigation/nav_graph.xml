@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_player_chosen" />
     <fragment
         android:id="@+id/addPlayerFragment"
-        android:name="com.example.favouriteplayertracker.ui.AddPlayerFragment"
+        android:name="com.example.favouriteplayertracker.ui.addPlayer.AddPlayerFragment"
         android:label="fragment_add_player"
         tools:layout="@layout/fragment_add_player" >
         <action

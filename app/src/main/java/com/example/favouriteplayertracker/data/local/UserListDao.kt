@@ -10,9 +10,11 @@ interface UserListDao {
     @Query("SELECT * FROM user_player_list")
     fun getAllPlayers(): Flow<List<FavouritePlayer>>
 
+    @Query("SELECT EXISTS (SELECT 1 FROM user_player_list WHERE name = :name)")
+    suspend fun playerExists(name: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addPlayer(player: FavouritePlayer)
-    // TODO: revert to a suspend function after moving add player logic to view model
+    suspend fun addPlayer(player: FavouritePlayer)
 
     @Delete
     suspend fun deletePlayer(player: FavouritePlayer)
