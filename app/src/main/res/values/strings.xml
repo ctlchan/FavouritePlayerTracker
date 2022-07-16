@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Favourite Player Tracker</string>
+    <string name="tab_name_1">Players</string>
+    <string name="tab_name_2">Discover</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="floating_action_button">Floating Action Button</string>
+    <string name="name_prompt">Name:</string>
+    <string name="new_player_ET_hint">Enter player\'s name.</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="player_picture">player picture</string>
+</resources>

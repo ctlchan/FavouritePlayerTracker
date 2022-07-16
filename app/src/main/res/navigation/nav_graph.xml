@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/tabHostFragment">
+    <fragment
+        android:id="@+id/tabHostFragment"
+        android:name="com.example.favouriteplayertracker.ui.tabs.TabHostFragment"
+        android:label="fragment_tab_host"
+        tools:layout="@layout/fragment_tab_host" >
+        <action
+            android:id="@+id/action_tabHostFragment_to_playerChosenFragment"
+            app:destination="@id/playerChosenFragment" />
+        <action
+            android:id="@+id/action_tabHostFragment_to_addPlayerFragment"
+            app:destination="@id/addPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerChosenFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenFragment"
+        android:label="fragment_player_chosen"
+        tools:layout="@layout/fragment_player_chosen" />
+    <fragment
+        android:id="@+id/addPlayerFragment"
+        android:name="com.example.favouriteplayertracker.ui.AddPlayerFragment"
+        android:label="fragment_add_player"
+        tools:layout="@layout/fragment_add_player" >
+        <action
+            android:id="@+id/action_addPlayerFragment_to_tabHostFragment"
+            app:destination="@id/tabHostFragment" />
+    </fragment>
+</navigation>
