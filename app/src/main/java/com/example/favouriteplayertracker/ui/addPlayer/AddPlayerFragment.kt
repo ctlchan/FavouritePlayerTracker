@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.example.favouriteplayertracker.R
-import com.example.favouriteplayertracker.data.local.FavouritePlayer
 import com.example.favouriteplayertracker.data.local.LocalDatabase
 import com.example.favouriteplayertracker.databinding.FragmentAddPlayerBinding
 import dagger.hilt.android.AndroidEntryPoint

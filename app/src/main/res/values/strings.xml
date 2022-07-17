@@ -10,4 +10,8 @@
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
     <string name="player_picture">player picture</string>
+    <string name="playerProfileImageContentDescription">picture of selected player</string>
+    <string name="team_label">Team:</string>
+    <string name="position_label">Position:</string>
+    <string name="physicals_label">Physicals:</string>
 </resources>

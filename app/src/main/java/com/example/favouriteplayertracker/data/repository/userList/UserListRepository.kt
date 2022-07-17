@@ -1,13 +1,8 @@
 package com.example.favouriteplayertracker.data.repository.userList
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import com.example.favouriteplayertracker.data.local.FavouritePlayer
-import com.example.favouriteplayertracker.data.local.LocalDatabase
-import kotlinx.coroutines.Dispatchers
+import com.example.favouriteplayertracker.data.local.Teams.TeamEntity
+import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 interface UserListRepository {
 
@@ -17,12 +12,16 @@ interface UserListRepository {
 
     suspend fun addFavouritePlayer(name: String)
 
+    suspend fun addTeam(team: TeamEntity)
+
     suspend fun removeFavouritePlayer(player: FavouritePlayer)
 
     suspend fun unselectPlayer()
 
     suspend fun reselectPlayer(name: String)
 
-    fun getSelected(): Flow<String>
+    fun getSelected(): Flow<FavouritePlayer>
+
+    fun getTeam(id: Int): Flow<TeamEntity>
 
 }

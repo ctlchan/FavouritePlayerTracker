@@ -1,6 +1,5 @@
-package com.example.favouriteplayertracker.data.local
+package com.example.favouriteplayertracker.data.local.UserList
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -28,8 +27,8 @@ interface UserListDao {
     @Query("UPDATE user_player_list SET selected=1 WHERE name = :name")
     suspend fun reselect(name: String)
 
-    @Query("SELECT name FROM user_player_list WHERE selected=1")
-    fun getSelected(): Flow<String>
+    @Query("SELECT * FROM user_player_list WHERE selected=1")
+    fun getSelected(): Flow<FavouritePlayer>
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.favouriteplayertracker.data.local
+package com.example.favouriteplayertracker.data.local.UserList
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -12,7 +12,7 @@ data class FavouritePlayer(
     val height_inches: Int?,
     val id: Long,
     val position: String,
-    val team_name: String,
+    var team_id: Int,
     val weight_pounds: Int?,
     var selected: Boolean = false
 )

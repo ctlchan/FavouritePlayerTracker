@@ -25,7 +25,7 @@ object AppModule {
     fun provideUserListRepository(
         @Named("database") db: LocalDatabase, @Named("NbaApi") nbaApi: NbaApi): UserListRepository {
         // Dagger-Hilt knows that db is provided so it will do that for you.
-        return UserListRepositoryImpl(db.userListDao(), nbaApi)
+        return UserListRepositoryImpl(db.userListDao(), nbaApi, db.teamDao())
 
     }
 

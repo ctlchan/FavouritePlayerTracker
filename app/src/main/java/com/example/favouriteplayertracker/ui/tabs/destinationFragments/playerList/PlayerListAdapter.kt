@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.favouriteplayertracker.R
-import com.example.favouriteplayertracker.data.local.FavouritePlayer
+import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
 
 
 class PlayerListAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<PlayerListAdapter.MyViewHolder>() {

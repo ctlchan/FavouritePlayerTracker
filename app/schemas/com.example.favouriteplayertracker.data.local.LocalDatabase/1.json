@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "edc9bc675ef6fb5b1bcd43f535d8d7b1",
+    "identityHash": "2fc3075e0ed359e22b6405d93ee79bad",
     "entities": [
       {
         "tableName": "user_player_list",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `height_feet` INTEGER, `height_inches` INTEGER, `id` INTEGER NOT NULL, `position` TEXT NOT NULL, `team_name` TEXT NOT NULL, `weight_pounds` INTEGER, `selected` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `height_feet` INTEGER, `height_inches` INTEGER, `id` INTEGER NOT NULL, `position` TEXT NOT NULL, `team_id` INTEGER NOT NULL, `weight_pounds` INTEGER, `selected` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -39,9 +39,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "team_name",
-            "columnName": "team_name",
-            "affinity": "TEXT",
+            "fieldPath": "team_id",
+            "columnName": "team_id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -65,12 +65,68 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "teams",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `abbreviation` TEXT NOT NULL, `city` TEXT NOT NULL, `conference` TEXT NOT NULL, `division` TEXT NOT NULL, `full_name` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "abbreviation",
+            "columnName": "abbreviation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "conference",
+            "columnName": "conference",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "division",
+            "columnName": "division",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "full_name",
+            "columnName": "full_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'edc9bc675ef6fb5b1bcd43f535d8d7b1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2fc3075e0ed359e22b6405d93ee79bad')"
     ]
   }
 }

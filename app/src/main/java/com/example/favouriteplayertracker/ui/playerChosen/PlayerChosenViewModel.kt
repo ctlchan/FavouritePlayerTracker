@@ -1,30 +1,31 @@
 package com.example.favouriteplayertracker.ui.playerChosen
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.favouriteplayertracker.data.local.Teams.TeamEntity
+import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
+import com.example.favouriteplayertracker.data.remote.Team
 import com.example.favouriteplayertracker.data.repository.userList.UserListRepository
+import com.example.favouriteplayertracker.data.repository.userList.doubleToLong
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import org.json.JSONArray
+import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Named
+import kotlin.properties.Delegates
 
 @HiltViewModel
 class PlayerChosenViewModel @Inject
     constructor(@Named("userListRepo") userListRepository: UserListRepository) : ViewModel() {
 
+    private val TAG = "PlayerChosenViewModel"
+
     private val userListRepo = userListRepository
 
-    fun getSelected(): LiveData<String> {
+    fun getSelected(): LiveData<FavouritePlayer> {
 
-        val selected = userListRepo.getSelected().asLiveData()
-
-        return selected
+        return userListRepo.getSelected().asLiveData()
     }
 
     fun unselect() {
@@ -33,6 +34,10 @@ class PlayerChosenViewModel @Inject
         }
     }
 
-    val testString: String = "Hello there."
+
+    fun getTeamInfo(teamId: Int): LiveData<TeamEntity> {
+        return userListRepo.getTeam(teamId).asLiveData()
+    }
 
 }
+
