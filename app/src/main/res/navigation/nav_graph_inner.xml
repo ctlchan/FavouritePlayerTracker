@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_inner"
+    app:startDestination="@id/playerInfoFragment">
+
+    <fragment
+        android:id="@+id/playerInfoFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.PlayerInfoFragment"
+        android:label="fragment_player_info"
+        tools:layout="@layout/fragment_player_info" >
+        <action
+            android:id="@+id/action_playerInfoFragment2_to_playerNewsFragment2"
+            app:destination="@id/playerNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerNewsFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.PlayerNewsFragment"
+        android:label="fragment_player_news"
+        tools:layout="@layout/fragment_player_news" >
+        <action
+            android:id="@+id/action_playerNewsFragment2_to_playerTweetsFragment2"
+            app:destination="@id/playerTweetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerTweetsFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.PlayerTweetsFragment"
+        android:label="fragment_player_tweets"
+        tools:layout="@layout/fragment_player_tweets" />
+</navigation>

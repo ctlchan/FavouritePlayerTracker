@@ -14,4 +14,7 @@
     <string name="team_label">Team:</string>
     <string name="position_label">Position:</string>
     <string name="physicals_label">Physicals:</string>
+    <string name="bottom_nav_stats">Stats</string>
+    <string name="bottom_nav_news">News</string>
+    <string name="bottom_nav_tweets">Tweets</string>
 </resources>

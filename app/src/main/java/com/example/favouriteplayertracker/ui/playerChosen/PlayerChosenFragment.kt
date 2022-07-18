@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.favouriteplayertracker.R
 import com.example.favouriteplayertracker.databinding.FragmentPlayerChosenBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class PlayerChosenFragment : Fragment() {
@@ -26,7 +28,6 @@ class PlayerChosenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentPlayerChosenBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -35,64 +36,24 @@ class PlayerChosenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getSelected().observe(viewLifecycleOwner) {
+//        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = binding.bottomNavFragmentContainer.getFragment<NavHostFragment>()
+        val navController = navHostFragment.navController
 
-            Log.i(TAG, "selected: $it")
+        Log.i(TAG, navController.toString())
 
-            if (it != null) {
-
-                if (it.team_id != 0) {
-                    observeTeamInfo(it.team_id)
-                }
+        binding.bottomNav.setupWithNavController(navController)
 
 
-                val heightF = when(it.height_feet) {
-                    null -> "?"
-                    else -> it.height_feet
-                }
-                val heightI = when(it.height_inches) {
-                    null -> "?"
-                    else -> it.height_inches
-                }
-                val weightP = when(it.weight_pounds) {
-                    null -> "?"
-                    else -> it.weight_pounds
-                }
-
-
-                binding.apply {
-                    nameTV.text = it.name
-                    playerPhysicals.text = playerPhysicals.text.toString().plus(
-                        """ $heightF'$heightI", ${weightP}lb"""
-                    )
-                    playerPosition.text = playerPosition.text.toString().plus(
-                        " ${it.position}"
-                    )
-                }
-            }
-
-
-
-
-
-
-        }
-
-    }
-
-    private fun observeTeamInfo(id: Int) {
-        viewModel.getTeamInfo(id).observe(viewLifecycleOwner) {
-            binding.playerTeam.text = binding.playerTeam.text.toString().plus(
-                " ${it.abbreviation}"
-            )
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.i(TAG, "$TAG: onDestroyView()")
+        Log.i(TAG, "onDestroyView()")
+        _binding = null
 
-        // update database to unselect player
         viewModel.unselect()
     }
+
+
 }

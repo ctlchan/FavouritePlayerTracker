@@ -10,17 +10,12 @@
         android:label="fragment_tab_host"
         tools:layout="@layout/fragment_tab_host" >
         <action
-            android:id="@+id/action_tabHostFragment_to_playerChosenFragment"
-            app:destination="@id/playerChosenFragment" />
-        <action
             android:id="@+id/action_tabHostFragment_to_addPlayerFragment"
             app:destination="@id/addPlayerFragment" />
+        <action
+            android:id="@+id/action_tabHostFragment_to_playerChosenFragment"
+            app:destination="@id/playerChosenFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/playerChosenFragment"
-        android:name="com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenFragment"
-        android:label="fragment_player_chosen"
-        tools:layout="@layout/fragment_player_chosen" />
     <fragment
         android:id="@+id/addPlayerFragment"
         android:name="com.example.favouriteplayertracker.ui.addPlayer.AddPlayerFragment"
@@ -30,4 +25,9 @@
             android:id="@+id/action_addPlayerFragment_to_tabHostFragment"
             app:destination="@id/tabHostFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/playerChosenFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenFragment"
+        android:label="fragment_player_chosen"
+        tools:layout="@layout/fragment_player_chosen" />
 </navigation>

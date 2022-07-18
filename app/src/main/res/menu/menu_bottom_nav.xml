@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/playerInfoFragment"
+        android:title="@string/bottom_nav_stats"
+        android:icon="@drawable/ic_baseline_bar_chart_36"/>
+
+    <item
+        android:id="@+id/playerNewsFragment"
+        android:title="@string/bottom_nav_news"
+        android:icon="@drawable/ic_baseline_newspaper_36"/>
+
+    <item
+        android:id="@+id/playerTweetsFragment"
+        android:title="@string/bottom_nav_tweets"
+        android:icon="@drawable/ic_baseline_hearing_36"/>
+
+
+</menu>

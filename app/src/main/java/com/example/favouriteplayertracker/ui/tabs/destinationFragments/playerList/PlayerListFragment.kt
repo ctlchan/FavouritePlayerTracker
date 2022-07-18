@@ -2,6 +2,7 @@ package com.example.favouriteplayertracker.ui.tabs.destinationFragments.playerLi
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,8 +73,11 @@ class PlayerListFragment : Fragment(), PlayerListAdapter.OnItemClickListener {
 
         viewModel.selectPlayer(selectedPlayer)
         findNavController().navigate(R.id.playerChosenFragment)
+    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
