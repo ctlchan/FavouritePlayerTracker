@@ -1,4 +1,4 @@
-package com.example.favouriteplayertracker.data.remote
+package com.example.favouriteplayertracker.data.remote.nbaApi
 
 data class NBAPlayer(
     val first_name: String,

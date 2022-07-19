@@ -8,8 +8,10 @@ import com.example.favouriteplayertracker.data.local.Teams.TeamDataDao
 import com.example.favouriteplayertracker.data.local.Teams.TeamEntity
 import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
 import com.example.favouriteplayertracker.data.local.UserList.UserListDao
+import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAverages
+import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAvgDao
 
-@Database(entities = [FavouritePlayer::class, TeamEntity::class],
+@Database(entities = [FavouritePlayer::class, TeamEntity::class, SeasonAverages::class],
     version = 1, exportSchema = true
 //    ,
 //    autoMigrations = [AutoMigration (from = 1, to = 2)]
@@ -19,6 +21,7 @@ abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun teamDao(): TeamDataDao
     abstract fun userListDao(): UserListDao
+    abstract fun seasonAvgDao(): SeasonAvgDao
 
     companion object {
 

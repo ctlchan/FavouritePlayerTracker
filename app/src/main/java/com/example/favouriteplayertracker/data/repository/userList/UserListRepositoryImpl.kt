@@ -5,7 +5,9 @@ import com.example.favouriteplayertracker.data.local.Teams.TeamDataDao
 import com.example.favouriteplayertracker.data.local.Teams.TeamEntity
 import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
 import com.example.favouriteplayertracker.data.local.UserList.UserListDao
-import com.example.favouriteplayertracker.data.remote.NbaApi
+import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAverages
+import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAvgDao
+import com.example.favouriteplayertracker.data.remote.nbaApi.NbaApi
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONArray
 import org.json.JSONObject
@@ -17,7 +19,8 @@ import kotlin.math.pow
 class UserListRepositoryImpl(
     private val userListDao: UserListDao,
     private val nbaApi: NbaApi,
-    private val teamDao: TeamDataDao
+    private val teamDao: TeamDataDao,
+    private val seasonAvgDao: SeasonAvgDao
 ): UserListRepository {
 
     private val TAG = "UserListRepoImpl"
@@ -25,6 +28,11 @@ class UserListRepositoryImpl(
 
     override fun getFavouritePlayers(): Flow<List<FavouritePlayer>> {
         return userListDao.getAllPlayers()
+    }
+
+    override fun getSeasonAverages(): Flow<List<SeasonAverages>> {
+        // TODO: Determine logic for WHEN to make API call
+        return seasonAvgDao.getSeasonAverages()
     }
 
     override suspend fun addFavouritePlayer(name: String) {

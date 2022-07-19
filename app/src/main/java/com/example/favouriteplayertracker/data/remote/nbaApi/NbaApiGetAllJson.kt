@@ -1,4 +1,4 @@
-package com.example.favouriteplayertracker.data.remote
+package com.example.favouriteplayertracker.data.remote.nbaApi
 
 data class NbaApiGetAllJson(
     val data: List<Map<String, Any>>,

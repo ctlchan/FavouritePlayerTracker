@@ -2,6 +2,7 @@ package com.example.favouriteplayertracker.data.repository.userList
 
 import com.example.favouriteplayertracker.data.local.Teams.TeamEntity
 import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
+import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAverages
 import kotlinx.coroutines.flow.Flow
 
 interface UserListRepository {
@@ -9,6 +10,8 @@ interface UserListRepository {
     // use a suspend function only when you need to access the API
 
     fun getFavouritePlayers(): Flow<List<FavouritePlayer>>
+
+    fun getSeasonAverages(): Flow<List<SeasonAverages>>
 
     suspend fun addFavouritePlayer(name: String)
 

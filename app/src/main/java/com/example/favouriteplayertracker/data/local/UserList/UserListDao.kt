@@ -9,6 +9,9 @@ interface UserListDao {
     @Query("SELECT * FROM user_player_list")
     fun getAllPlayers(): Flow<List<FavouritePlayer>>
 
+    @Query("SELECT id FROM user_player_list")
+    fun getPlayerIds(): Flow<List<Int>>
+
     @Query("SELECT EXISTS (SELECT 1 FROM user_player_list WHERE name = :name)")
     suspend fun playerExists(name: String): Boolean
 

@@ -2,7 +2,7 @@ package com.example.favouriteplayertracker.data.dependencies
 
 import android.content.Context
 import com.example.favouriteplayertracker.data.local.LocalDatabase
-import com.example.favouriteplayertracker.data.remote.NbaApi
+import com.example.favouriteplayertracker.data.remote.nbaApi.NbaApi
 import com.example.favouriteplayertracker.data.repository.userList.UserListRepository
 import com.example.favouriteplayertracker.data.repository.userList.UserListRepositoryImpl
 import dagger.Module
@@ -23,12 +23,13 @@ object AppModule {
     @Named("userListRepo")
     @Provides
     fun provideUserListRepository(
-        @Named("database") db: LocalDatabase, @Named("NbaApi") nbaApi: NbaApi): UserListRepository {
+        @Named("database") db: LocalDatabase, @Named("NbaApi") nbaApi: NbaApi
+    ): UserListRepository {
         // Dagger-Hilt knows that db is provided so it will do that for you.
-        return UserListRepositoryImpl(db.userListDao(), nbaApi, db.teamDao())
+        return UserListRepositoryImpl(db.userListDao(), nbaApi, db.teamDao(),
+            db.seasonAvgDao())
 
     }
-
 
     @Singleton
     @Named("database")
