@@ -13,6 +13,8 @@ interface UserListRepository {
 
     fun getSeasonAverages(): Flow<List<SeasonAverages>>
 
+    suspend fun getPlayerNames(): List<String>
+
     suspend fun addFavouritePlayer(name: String)
 
     suspend fun addTeam(team: TeamEntity)
@@ -24,6 +26,8 @@ interface UserListRepository {
     suspend fun reselectPlayer(name: String)
 
     fun getSelected(): Flow<FavouritePlayer>
+
+    suspend fun getSelectedId(): Int
 
     fun getTeam(id: Int): Flow<TeamEntity>
 

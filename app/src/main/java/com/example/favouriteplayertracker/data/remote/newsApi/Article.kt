@@ -1,10 +1,10 @@
 package com.example.favouriteplayertracker.data.remote.newsApi
 
-data class NewsArticle(
+data class Article(
     val _id: String,
     val _score: Double,
     val author: Any,
-    val authors: List<Any>,
+    val authors: String,
     val clean_url: String,
     val country: String,
     val is_opinion: Boolean,

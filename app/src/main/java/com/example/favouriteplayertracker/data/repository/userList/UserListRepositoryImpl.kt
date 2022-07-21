@@ -7,14 +7,12 @@ import com.example.favouriteplayertracker.data.local.UserList.FavouritePlayer
 import com.example.favouriteplayertracker.data.local.UserList.UserListDao
 import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAverages
 import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAvgDao
+import com.example.favouriteplayertracker.data.remote.ApiHelper
 import com.example.favouriteplayertracker.data.remote.nbaApi.NbaApi
 import kotlinx.coroutines.flow.Flow
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.NullPointerException
-import kotlin.math.pow
 
 class UserListRepositoryImpl(
     private val userListDao: UserListDao,
@@ -33,6 +31,14 @@ class UserListRepositoryImpl(
     override fun getSeasonAverages(): Flow<List<SeasonAverages>> {
         // TODO: Determine logic for WHEN to make API call
         return seasonAvgDao.getSeasonAverages()
+    }
+
+    override suspend fun getPlayerNames(): List<String> {
+        return userListDao.getPlayerNames()
+    }
+
+    override suspend fun getSelectedId(): Int {
+        return userListDao.getSelectedId()
     }
 
     override suspend fun addFavouritePlayer(name: String) {
@@ -74,7 +80,7 @@ class UserListRepositoryImpl(
                 Log.i("dataMap", teamMap::class.java.simpleName)
 
 
-                val newTeam = mapToTeamEntity(teamMap as Map<String, *>)
+                val newTeam = ApiHelper.mapToTeamEntity(teamMap as Map<String, *>)
 
                 val newTeamId = newTeam.id
 
@@ -83,24 +89,24 @@ class UserListRepositoryImpl(
                     height_feet = if (data["height_feet"] == null) {
                        data["height_feet"] as Int?
                    } else {
-                          doubleToLong(data["height_feet"].toString()).toInt()
+                        ApiHelper.doubleToLong(data["height_feet"].toString()).toInt()
                           },
                     height_inches = if (data["height_inches"] == null) {
                         data["height_inches"] as Int?
                     } else {
-                        doubleToLong(data["height_inches"].toString()).toInt()
+                        ApiHelper.doubleToLong(data["height_inches"].toString()).toInt()
                     },
                     id = if ('E' in data["id"].toString()) {
-                        scientificNotationToLong(data["id"].toString())
+                        ApiHelper.scientificNotationToLong(data["id"].toString())
                     } else {
-                           doubleToLong(data["id"].toString())
+                        ApiHelper.doubleToLong(data["id"].toString())
                            },
                     position = data["position"].toString(),
                     team_id = newTeamId,
                     weight_pounds = if (data["weight_pounds"] == null) {
                         data["weight_pounds"] as Int?
                     } else {
-                        doubleToLong(data["weight_pounds"].toString()).toInt()
+                        ApiHelper.doubleToLong(data["weight_pounds"].toString()).toInt()
                     },
                 )
 
@@ -138,83 +144,6 @@ class UserListRepositoryImpl(
 
 }
 
-fun scientificNotationToLong(number: String): Long {
-    var initial: String = ""
-    var beforeE = true
-    var exponent: Int = 0
-
-    for (char in number) {
-
-        if (char == 'E') {
-            beforeE = false
-        }
-
-        else if (beforeE) {
-            initial = initial.plus(char)
-        }
-
-        else if (!beforeE) {
-            exponent = char.digitToInt()
-        }
-
-    }
-    Log.i("Conversion", "Initial: $initial")
-    Log.i("Conversion", "Exponent: $exponent")
-    // convert
-    val ten = 10
-    val doubleTen = ten.toDouble()
-    val tenToExponent = doubleTen.pow(exponent)
-    val result = initial.toDouble() * tenToExponent
-
-    return result.toLong()
-
-}
-
-fun doubleToLong(double: String): Long {
-    // Converts Double of format XXX.0 to Long
-    var result: String = ""
-    var i = 0
-
-    while (double[i] != '.') {
-        result = result.plus(double[i])
-
-        i ++
-    }
-
-    return result.toLong()
-
-}
-/*
-* Function to help convert a string representation of a JSON to a Kotlin map
-* From: stackoverflow.com/questions/44870961/how-to-map-a-json-string-to-kotlin-map
-*
-* Note: Unused as of 7/17/22
-* */
-private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
-    when (val value = this[it])
-    {
-        is JSONArray ->
-        {
-            val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
-            JSONObject(map).toMap().values.toList()
-        }
-        is JSONObject -> value.toMap()
-        JSONObject.NULL -> null
-        else -> value
-    }
-}
-
-private fun mapToTeamEntity(teamMap: Map<String, *>): TeamEntity {
-    return TeamEntity(
-        id = doubleToLong(teamMap["id"].toString()).toInt(),
-        abbreviation = teamMap["abbreviation"].toString(),
-        city = teamMap["city"].toString(),
-        conference = teamMap["conference"].toString(),
-        division = teamMap["division"].toString(),
-        full_name = teamMap["full_name"].toString(),
-        name = teamMap["name"].toString()
-    )
-}
 
 
 

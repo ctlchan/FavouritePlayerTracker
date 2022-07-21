@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2fc3075e0ed359e22b6405d93ee79bad",
+    "identityHash": "391a8499d7e7ac54fe2b12a7ab0812e0",
     "entities": [
       {
         "tableName": "user_player_list",
@@ -121,12 +121,196 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "season_averages",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`playerId` INTEGER NOT NULL, `ast` REAL NOT NULL, `blk` REAL NOT NULL, `dreb` REAL NOT NULL, `fg3_pct` REAL NOT NULL, `fg3a` REAL NOT NULL, `fg3m` REAL NOT NULL, `fg_pct` REAL NOT NULL, `fga` REAL NOT NULL, `fgm` REAL NOT NULL, `ft_pct` REAL NOT NULL, `fta` REAL NOT NULL, `ftm` REAL NOT NULL, `games_played` INTEGER NOT NULL, `min` TEXT NOT NULL, `oreb` REAL NOT NULL, `pf` REAL NOT NULL, `player_id` INTEGER NOT NULL, `pts` REAL NOT NULL, `reb` REAL NOT NULL, `season` INTEGER NOT NULL, `stl` REAL NOT NULL, `turnover` REAL NOT NULL, PRIMARY KEY(`playerId`))",
+        "fields": [
+          {
+            "fieldPath": "playerId",
+            "columnName": "playerId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ast",
+            "columnName": "ast",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "blk",
+            "columnName": "blk",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dreb",
+            "columnName": "dreb",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fg3_pct",
+            "columnName": "fg3_pct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fg3a",
+            "columnName": "fg3a",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fg3m",
+            "columnName": "fg3m",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fg_pct",
+            "columnName": "fg_pct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fga",
+            "columnName": "fga",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fgm",
+            "columnName": "fgm",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ft_pct",
+            "columnName": "ft_pct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fta",
+            "columnName": "fta",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ftm",
+            "columnName": "ftm",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "games_played",
+            "columnName": "games_played",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "min",
+            "columnName": "min",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "oreb",
+            "columnName": "oreb",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pf",
+            "columnName": "pf",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "player_id",
+            "columnName": "player_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pts",
+            "columnName": "pts",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reb",
+            "columnName": "reb",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "season",
+            "columnName": "season",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stl",
+            "columnName": "stl",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "turnover",
+            "columnName": "turnover",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "playerId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "articles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`playerId` INTEGER NOT NULL, `articles` TEXT NOT NULL, `lastUpdated` TEXT NOT NULL, PRIMARY KEY(`playerId`))",
+        "fields": [
+          {
+            "fieldPath": "playerId",
+            "columnName": "playerId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "articles",
+            "columnName": "articles",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "playerId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2fc3075e0ed359e22b6405d93ee79bad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '391a8499d7e7ac54fe2b12a7ab0812e0')"
     ]
   }
 }
