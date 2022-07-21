@@ -1,4 +1,4 @@
-package com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations
+package com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.News
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.favouriteplayertracker.databinding.FragmentPlayerNewsBinding
 import com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,14 +37,22 @@ class PlayerNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeNews()
+        val adapter = NewsRecyclerAdapter()
+        val layoutManager = LinearLayoutManager(context)
+
+        binding.newsRecycler.adapter = adapter
+        binding.newsRecycler.layoutManager = layoutManager
+
+        observeNews(adapter)
     }
 
-    fun observeNews() {
-
+    fun observeNews(adapter: NewsRecyclerAdapter) {
+        // TODO: fix recyclerview layout: need more space for each item (vertically)
         lifecycleScope.launch {
             viewModel.getNews().observe(viewLifecycleOwner) {
-                binding.headline.text = it.articles[0].title
+                adapter.updateData(it.articles)
+                adapter.notifyDataSetChanged()
+
             }
         }
     }

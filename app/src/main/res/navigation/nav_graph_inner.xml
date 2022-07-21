@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/playerNewsFragment"
-        android:name="com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.PlayerNewsFragment"
+        android:name="com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.News.PlayerNewsFragment"
         android:label="fragment_player_news"
         tools:layout="@layout/fragment_player_news" >
         <action

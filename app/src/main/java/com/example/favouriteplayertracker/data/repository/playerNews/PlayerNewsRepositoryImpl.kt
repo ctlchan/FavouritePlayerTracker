@@ -1,6 +1,8 @@
 package com.example.favouriteplayertracker.data.repository.playerNews
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.example.favouriteplayertracker.data.local.UserList.UserListDao
 import com.example.favouriteplayertracker.data.local.newsData.PlayerNews
@@ -29,8 +31,16 @@ class PlayerNewsRepositoryImpl(
 
         Log.i(TAG, "newsDao.getCount(): ${newsDao.getCount()}")
 
-        if (newsDao.getCount() == 0) {
-            val players = userListDao.getPlayerNames()
+        val players = userListDao.getPlayerNames()
+        val numNewsRows = newsDao.getCount()
+        val numPlayerRows = players.size
+
+        // No need to check if  PlayerList is also empty b/c it can't be to get to the news fragment
+        if (numNewsRows == 0 || numNewsRows != numPlayerRows) {
+            // Case: no news has been stored or there is desync in the saved players and the news
+            // stored about them.
+
+            Log.i(TAG, "Updating entire player List")
             Log.i(TAG, players.toString())
             for (player in players) {
                 storeFromNetwork(player)
@@ -39,7 +49,6 @@ class PlayerNewsRepositoryImpl(
 
         // else: check if need to update
         else {
-            Log.i(TAG, "News cache not empty!")
             val lastUpdated = newsDao.getLastUpdated(playerId)
             val currentTime = LocalDateTime.now().format(formatter)
 
@@ -48,20 +57,25 @@ class PlayerNewsRepositoryImpl(
 
             val diffInMinutes = Duration.between(time1, time2).toMinutes()
 
-            var playerName: String? = null
-
             // Make an API call to update data every hour.
             if (diffInMinutes > 60) {
                 // Find player's name
-                for (player in userListDao.getAllPlayers().asLiveData().value!!) {
-                    if (player.id == playerId.toLong()) {
-                        playerName = player.name
-                    }
-                }
+//                for (player in userListDao.getAllPlayers().asLiveData().value!!) {
+//                    if (player.id == playerId.toLong()) {
+//                        playerName = player.name
+//                    }
+//                }
+
+                val idToNameMap: Map<Long, String> = userListDao.getIdToNameMap()
+                Log.i(TAG, "Map: ${idToNameMap.toString()}")
+
+                val playerName = idToNameMap[playerId.toLong()]
+                Log.i(TAG, "player name from map: $playerName")
 
                 if (playerName != null) {
                     storeFromNetwork(playerName)
                 }
+
             }
         }
 

@@ -41,6 +41,10 @@ class UserListRepositoryImpl(
         return userListDao.getSelectedId()
     }
 
+    override suspend fun getIdToNameMap(): Map<Long, String> {
+        return userListDao.getIdToNameMap()
+    }
+
     override suspend fun addFavouritePlayer(name: String) {
 
         // Check if they're already being tracked before making API request.

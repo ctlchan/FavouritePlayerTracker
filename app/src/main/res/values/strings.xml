@@ -17,4 +17,5 @@
     <string name="bottom_nav_stats">Stats</string>
     <string name="bottom_nav_news">News</string>
     <string name="bottom_nav_tweets">Tweets</string>
+    <string name="news_item_image_content_description">news item image</string>
 </resources>

@@ -11,6 +11,8 @@ interface UserListRepository {
 
     fun getFavouritePlayers(): Flow<List<FavouritePlayer>>
 
+    suspend fun getIdToNameMap(): Map<Long, String>
+
     fun getSeasonAverages(): Flow<List<SeasonAverages>>
 
     suspend fun getPlayerNames(): List<String>

@@ -12,6 +12,10 @@ interface UserListDao {
     @Query("SELECT name FROM user_player_list")
     suspend fun getPlayerNames(): List<String>
 
+    @MapInfo(keyColumn = "id", valueColumn = "name")
+    @Query("SELECT id AS id, name AS name FROM user_player_list")
+    suspend fun getIdToNameMap(): Map<Long, String>
+
     @Query("SELECT EXISTS (SELECT 1 FROM user_player_list WHERE name = :name)")
     suspend fun playerExists(name: String): Boolean
 
