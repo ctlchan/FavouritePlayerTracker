@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.favouriteplayertracker.R
 import com.example.favouriteplayertracker.databinding.FragmentPlayerListBinding
+import com.example.favouriteplayertracker.utility.MarginItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -58,6 +59,11 @@ class PlayerListFragment : Fragment(), PlayerListAdapter.OnItemClickListener {
 
         binding.playerListRV.adapter = adapter
         binding.playerListRV.layoutManager = LinearLayoutManager(context)
+        binding.playerListRV.addItemDecoration(
+            MarginItemDecoration(
+                resources.getDimensionPixelSize(R.dimen.margin)
+            )
+        )
 
         viewModel.userList.observe(viewLifecycleOwner) { newList ->
             adapter.updateList(newList)

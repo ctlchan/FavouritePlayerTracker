@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.favouriteplayertracker.R
 import com.example.favouriteplayertracker.databinding.FragmentPlayerNewsBinding
 import com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenViewModel
+import com.example.favouriteplayertracker.utility.MarginItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -42,12 +44,16 @@ class PlayerNewsFragment : Fragment() {
 
         binding.newsRecycler.adapter = adapter
         binding.newsRecycler.layoutManager = layoutManager
+        binding.newsRecycler.addItemDecoration(
+            MarginItemDecoration(
+                resources.getDimensionPixelSize(R.dimen.margin)
+            )
+        )
 
         observeNews(adapter)
     }
 
     fun observeNews(adapter: NewsRecyclerAdapter) {
-        // TODO: fix recyclerview layout: need more space for each item (vertically)
         lifecycleScope.launch {
             viewModel.getNews().observe(viewLifecycleOwner) {
                 adapter.updateData(it.articles)
