@@ -1,5 +1,7 @@
 package com.example.favouriteplayertracker.ui.playerChosen.bottomNavDestinations.News
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.favouriteplayertracker.R
+import com.example.favouriteplayertracker.data.remote.newsApi.Article
 import com.example.favouriteplayertracker.databinding.FragmentPlayerNewsBinding
 import com.example.favouriteplayertracker.ui.playerChosen.PlayerChosenViewModel
 import com.example.favouriteplayertracker.utility.MarginItemDecoration
@@ -18,7 +21,8 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class PlayerNewsFragment : Fragment() {
+class PlayerNewsFragment : Fragment(),
+    NewsRecyclerAdapter.OnItemClickListener{
 
     private val TAG = "PlayerNewsFragment"
     private var _binding: FragmentPlayerNewsBinding? = null
@@ -39,7 +43,7 @@ class PlayerNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = NewsRecyclerAdapter()
+        val adapter = NewsRecyclerAdapter(this)
         val layoutManager = LinearLayoutManager(context)
 
         binding.newsRecycler.adapter = adapter
@@ -61,6 +65,18 @@ class PlayerNewsFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun onItemClick(article: Article) {
+        Log.i(TAG, "Article clicked! Headline: ${article.title}")
+        Log.i(TAG, "Article link: ${article.link}")
+
+        // Convert link to Uri since that is needed for Intent
+        val uri = Uri.parse(article.link)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+
+        startActivity(intent)
+
     }
 
 
