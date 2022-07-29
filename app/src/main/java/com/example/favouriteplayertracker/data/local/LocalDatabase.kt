@@ -14,20 +14,24 @@ import com.example.favouriteplayertracker.data.local.newsData.PlayerNews
 import com.example.favouriteplayertracker.data.local.newsData.NewsDao
 import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAverages
 import com.example.favouriteplayertracker.data.local.seasonAverages.SeasonAvgDao
+import com.example.favouriteplayertracker.data.local.twitterData.TweetConverter
+import com.example.favouriteplayertracker.data.local.twitterData.TweetDao
+import com.example.favouriteplayertracker.data.local.twitterData.Tweets
 
 @Database(entities = [FavouritePlayer::class, TeamEntity::class, SeasonAverages::class,
-                     PlayerNews::class],
+                     PlayerNews::class, Tweets::class],
     version = 1, exportSchema = true
 //    ,
 //    autoMigrations = [AutoMigration (from = 1, to = 2)]
 )
-@TypeConverters(ArticleConverter::class)
+@TypeConverters(ArticleConverter::class, TweetConverter::class)
 abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun teamDao(): TeamDataDao
     abstract fun userListDao(): UserListDao
     abstract fun seasonAvgDao(): SeasonAvgDao
     abstract fun newsDao(): NewsDao
+    abstract fun tweetsDao(): TweetDao
 
     companion object {
 

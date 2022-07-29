@@ -57,12 +57,11 @@ class PlayerNewsFragment : Fragment(),
         observeNews(adapter)
     }
 
-    fun observeNews(adapter: NewsRecyclerAdapter) {
+    private fun observeNews(adapter: NewsRecyclerAdapter) {
         lifecycleScope.launch {
             viewModel.getNews().observe(viewLifecycleOwner) {
-                adapter.updateData(it.articles)
-                adapter.notifyDataSetChanged()
-
+                    adapter.updateData(it.articles)
+                    adapter.notifyDataSetChanged()
             }
         }
     }

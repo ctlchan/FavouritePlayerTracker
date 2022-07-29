@@ -62,19 +62,19 @@ class ApiHelper {
         *
         * Note: Unused as of 7/17/22
         * */
-        fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
-            when (val value = this[it])
-            {
-                is JSONArray ->
-                {
-                    val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
-                    JSONObject(map).toMap().values.toList()
-                }
-                is JSONObject -> value.toMap()
-                JSONObject.NULL -> null
-                else -> value
-            }
-        }
+//        fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
+//            when (val value = this[it])
+//            {
+//                is JSONArray ->
+//                {
+//                    val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
+//                    JSONObject(map).toMap().values.toList()
+//                }
+//                is JSONObject -> value.toMap()
+//                JSONObject.NULL -> null
+//                else -> value
+//            }
+//        }
 
         fun mapToTeamEntity(teamMap: Map<String, *>): TeamEntity {
             return TeamEntity(

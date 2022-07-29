@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/drawable/ic_baseline_newspaper_36.xml" value="0.124" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/drawable/ic_baseline_newspaper_72.xml" value="0.124" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/layout/fragment_player_news.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/layout/fragment_player_tweets.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/layout/news_item.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker-master/app/src/main/res/layout/tweet.xml" value="0.2" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker/app/src/main/res/layout/activity_main.xml" value="0.11382113821138211" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker/app/src/main/res/layout/fragment_add_player.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chris/AndroidStudioProjects/FavouritePlayerTracker/app/src/main/res/layout/fragment_discover.xml" value="0.176" />

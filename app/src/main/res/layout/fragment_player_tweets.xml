@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.playerChosen.bottomNavDestinations.PlayerTweetsFragment">
+    tools:context=".ui.playerChosen.bottomNavDestinations.tweets.PlayerTweetsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tweet_list"
         android:layout_height="match_parent"
-        android:text="Tweets"
-        android:textSize="48sp"
-        android:gravity="center"/>
+        android:layout_width="match_parent"
+        tools:listitem="@layout/tweet"/>
 
 </FrameLayout>

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "391a8499d7e7ac54fe2b12a7ab0812e0",
+    "identityHash": "056ef5e971ca144281830e0ff086d6f9",
     "entities": [
       {
         "tableName": "user_player_list",
@@ -305,12 +305,44 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "player_tweets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`playerName` TEXT NOT NULL, `tweets` TEXT NOT NULL, `lastUpdated` TEXT NOT NULL, PRIMARY KEY(`playerName`))",
+        "fields": [
+          {
+            "fieldPath": "playerName",
+            "columnName": "playerName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tweets",
+            "columnName": "tweets",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "playerName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '391a8499d7e7ac54fe2b12a7ab0812e0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '056ef5e971ca144281830e0ff086d6f9')"
     ]
   }
 }

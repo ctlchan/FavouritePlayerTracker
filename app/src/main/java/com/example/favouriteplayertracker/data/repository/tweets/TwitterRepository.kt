@@ -1,10 +1,16 @@
 package com.example.favouriteplayertracker.data.repository.tweets
 
 import androidx.lifecycle.LiveData
-import io.github.redouane59.twitter.dto.tweet.TweetList
+import com.example.favouriteplayertracker.data.local.twitterData.Tweets
+import kotlinx.coroutines.flow.Flow
+
 
 interface TwitterRepository {
 
-    suspend fun getPlayerTweets(playerName: String): TweetList
+    suspend fun getTweets(playerName: String): Flow<Tweets>
+
+    suspend fun refreshTweets(playerName: String)
+
+    suspend fun storeFromNetwork(playerName: String)
 
 }

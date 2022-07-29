@@ -14,7 +14,7 @@
             android:id="@+id/news_image"
             android:layout_width="100dp"
             android:layout_height="90dp"
-            android:src="@drawable/ic_baseline_image_72"
+            android:src="@drawable/ic_baseline_newspaper_72"
             android:contentDescription="@string/news_item_image_content_description"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

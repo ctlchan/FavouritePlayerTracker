@@ -1,10 +1,7 @@
 package com.example.favouriteplayertracker.data.dependencies
 
 import android.content.Context
-import android.content.res.Resources
-import com.example.favouriteplayertracker.BuildConfig
 import com.example.favouriteplayertracker.BuildConfig.*
-import com.example.favouriteplayertracker.R
 import com.example.favouriteplayertracker.data.local.LocalDatabase
 import com.example.favouriteplayertracker.data.remote.nbaApi.NbaApi
 import com.example.favouriteplayertracker.data.remote.newsApi.NewsApi
@@ -14,16 +11,15 @@ import com.example.favouriteplayertracker.data.repository.tweets.TwitterReposito
 import com.example.favouriteplayertracker.data.repository.tweets.TwitterRepositoryImpl
 import com.example.favouriteplayertracker.data.repository.userList.UserListRepository
 import com.example.favouriteplayertracker.data.repository.userList.UserListRepositoryImpl
+import com.twitter.clientlib.TwitterCredentialsBearer
+import com.twitter.clientlib.api.TwitterApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.github.redouane59.twitter.TwitterClient
-import io.github.redouane59.twitter.signature.TwitterCredentials
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -57,9 +53,9 @@ object AppModule {
     @Named("tweetRepo")
     @Provides
     fun provideTweetRepository(
-        @Named("twitterClient") twitterClient: TwitterClient
+        @Named("twitterApi") twitterApi: TwitterApi, @Named("database") db: LocalDatabase
     ): TwitterRepository {
-        return TwitterRepositoryImpl(twitterClient)
+        return TwitterRepositoryImpl(twitterApi, db.tweetsDao(), db.userListDao())
     }
 
 
@@ -92,16 +88,13 @@ object AppModule {
     }
 
     @Singleton
-    @Named("twitterClient")
+    @Named("twitterApi")
     @Provides
-    fun provideTwitterClient(): TwitterClient {
+    fun provideTwitterApi(): TwitterApi {
 
-        return TwitterClient(TwitterCredentials.builder()
-            .accessToken(TWITTER_TOKEN)
-            .accessTokenSecret(TWITTER_TOKEN_SECRET)
-            .apiKey(TWITTER_KEY)
-            .apiSecretKey(TWITTER_KEY_SECRET)
-            .build())
+        return TwitterApi(
+            TwitterCredentialsBearer(TWITTER_BEARER)
+        )
     }
 
 }
